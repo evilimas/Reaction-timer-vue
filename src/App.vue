@@ -1,24 +1,30 @@
 <template>
   <h1>Reaction Timer</h1>
   <p>Want to check your reaction time?</p>
+  <button class="how-to" @click="toggleModal">How To Play</button>
   <button @click="start" :disabled="isPlaying">Press Play</button>
   <Block v-if="isPlaying" :delay="delay" @end="endGame" />
   <Results v-if="showResults" :score="score" />
+  <div v-if="showModal">
+    <Modal @close="toggleModal" />
+  </div>
 </template>
 
 <script>
 import Block from './components/Block.vue';
 import Results from './components/Results.vue';
+import Modal from './components/Modal.vue';
 
 export default {
   name: 'App',
-  components: { Block, Results },
+  components: { Block, Results, Modal },
   data() {
     return {
       isPlaying: false,
       delay: null,
       score: null,
       showResults: false,
+      showModal: false,
     };
   },
   methods: {
@@ -31,6 +37,9 @@ export default {
       this.score = reactionTime;
       this.isPlaying = false;
       this.showResults = true;
+    },
+    toggleModal() {
+      this.showModal = !this.showModal;
     },
   },
 };
@@ -62,5 +71,10 @@ button {
 button[disabled] {
   opacity: 0.4;
   cursor: not-allowed;
+}
+.how-to {
+  position: absolute;
+  top: 0;
+  right: 20%;
 }
 </style>
