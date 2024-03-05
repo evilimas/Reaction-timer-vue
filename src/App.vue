@@ -80,6 +80,9 @@ button[disabled] {
   opacity: 0.4;
   cursor: not-allowed;
 }
+button:hover {
+  background: #18c096;
+}
 .how-to {
   position: absolute;
   top: 0;
